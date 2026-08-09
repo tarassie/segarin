@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Toko Buah dan Sayur Segarin</title>
+<style>
+:root{
+ --g:#28764a;--g2:#4fae68;--dark:#183b29;--cream:#fffaf1;--cream2:#f3f8e9;
+ --orange:#ff934f;--yellow:#ffd75a;--pink:#ff91a7;--purple:#a985e8;
+ --text:#26372c;--muted:#718078;--white:#fff;--line:#e6eadf;
+ --shadow:0 18px 45px rgba(35,75,47,.12);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:Inter,system-ui,-apple-system,"Segoe UI",sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden}
+button,a{font:inherit}button{cursor:pointer}
+.container{width:min(1180px,92%);margin:auto}
+header{position:sticky;top:0;z-index:100;background:rgba(255,250,241,.91);backdrop-filter:blur(16px);border-bottom:1px solid #ece8dc}
+.musicbtn{border:1px solid var(--line);background:#fff;color:var(--dark);border-radius:14px;padding:10px 12px;font-weight:900;white-space:nowrap}.musicbtn.on{background:#fff0b9;border-color:#f0cf62;color:#765600}
+.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}
+.logo{display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--dark);font-weight:950}
+.logo-icon{width:43px;height:43px;border-radius:15px;background:linear-gradient(145deg,#72c76d,#21683e);display:grid;place-items:center;font-size:24px;box-shadow:inset -5px -6px 9px #18512f55}
+.logo small{display:block;color:var(--g);font-size:9px;letter-spacing:1.5px;text-transform:uppercase}
+nav{display:flex;gap:26px}nav a{color:#56645b;text-decoration:none;font-size:.92rem;font-weight:800}nav a:hover{color:var(--g)}
+.cart{border:0;background:var(--dark);color:#fff;border-radius:14px;padding:11px 15px;font-weight:900;position:relative}
+.count{position:absolute;right:-7px;top:-7px;width:22px;height:22px;background:var(--pink);border-radius:50%;display:grid;place-items:center;font-size:11px}
+
+/* HERO */
+.hero{padding:66px 0 75px;background:
+radial-gradient(circle at 5% 12%,#ffe48c 0 3%,transparent 3.5%),
+radial-gradient(circle at 96% 19%,#bfe8b6 0 4%,transparent 4.5%),
+linear-gradient(135deg,#fffaf1,#edf8e9)}
+.hero-grid{display:grid;grid-template-columns:1fr 1fr;gap:54px;align-items:center}
+.kicker{display:inline-flex;align-items:center;gap:7px;background:#fff;border:1px solid #ebe7d9;padding:8px 12px;border-radius:99px;color:var(--g);font-size:.77rem;font-weight:900;box-shadow:0 8px 22px #355b3210}
+h1{font-size:clamp(2.8rem,6vw,5.3rem);line-height:.97;letter-spacing:-4px;margin:18px 0}
+h1 span{color:var(--g)}
+.hero p{max-width:590px;color:var(--muted);font-size:1.03rem}
+.actions{display:flex;gap:11px;flex-wrap:wrap;margin-top:27px}
+.btn{display:inline-flex;align-items:center;gap:8px;text-decoration:none;border-radius:14px;padding:13px 18px;font-weight:900}
+.mainbtn{background:var(--g);color:#fff;box-shadow:0 10px 22px #28764a33}.lightbtn{background:#fff;color:var(--dark);border:1px solid var(--line)}
+.hero-notes{display:flex;flex-wrap:wrap;gap:15px;margin-top:23px;color:#627168;font-size:.81rem}.hero-notes b{color:var(--g)}
+.hero-art{height:455px;border-radius:42px;background:linear-gradient(145deg,#ddf2d7,#a6d89e);position:relative;overflow:hidden;box-shadow:var(--shadow)}
+.hero-art:before{content:"";position:absolute;width:280px;height:280px;border-radius:50%;background:#f8df73;right:-80px;top:-80px}
+.hero-art:after{content:"";position:absolute;width:230px;height:230px;border-radius:50%;background:#8cc98d;left:-100px;bottom:-80px}
+.hero-fruit{position:absolute;width:110px;height:110px;border-radius:50%;display:grid;place-items:center;font-size:65px;background:linear-gradient(145deg,#fff,#edf5df);box-shadow:inset -9px -11px 15px #355b3215,0 20px 25px #355b3222;filter:drop-shadow(4px 7px 3px #315c3530);animation:bob 4s ease-in-out infinite;z-index:2}
+.hf1{left:13%;top:19%}.hf2{right:13%;top:30%;animation-delay:.5s}.hf3{left:29%;bottom:14%;animation-delay:1s}.hf4{right:30%;bottom:10%;animation-delay:1.5s}.hf5{left:49%;top:8%;width:73px;height:73px;font-size:44px;animation-delay:.8s}
+@keyframes bob{50%{transform:translateY(-10px) rotate(4deg)}}
+.hero-label{position:absolute;z-index:4;left:24px;bottom:23px;background:#fff;padding:13px 16px;border-radius:16px;color:var(--g);font-weight:950;box-shadow:var(--shadow)}
+.deco{position:absolute;z-index:3;font-size:22px}.d1{left:7%;top:9%}.d2{right:7%;bottom:18%}.d3{left:48%;bottom:4%}
+
+/* COMMON */
+section{padding:75px 0}.top{display:flex;align-items:end;justify-content:space-between;gap:25px;margin-bottom:29px}
+.eyebrow{color:var(--orange);font-size:.73rem;font-weight:950;letter-spacing:2px;text-transform:uppercase}
+h2{font-size:2.1rem;letter-spacing:-1.5px;line-height:1.05;margin-top:7px}.desc{color:var(--muted);max-width:590px;margin-top:8px}
+.chips{display:flex;gap:8px;flex-wrap:wrap}.chip{border:1px solid var(--line);background:#fff;color:#627068;border-radius:99px;padding:9px 14px;font-weight:850}.chip.active,.chip:hover{background:var(--g);border-color:var(--g);color:#fff}
+
+/* PRODUCTS */
+.products{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.card{background:#fff;border-radius:23px;padding:11px;box-shadow:var(--shadow);transition:.23s;position:relative}.card:hover{transform:translateY(-6px)}
+.pic{height:190px;border-radius:18px;background:linear-gradient(145deg,#f0f9e9,#d8eed2);position:relative;display:grid;place-items:center;overflow:hidden}
+.pic:after{content:"";position:absolute;width:120px;height:120px;border-radius:50%;background:#fff9;right:-42px;top:-42px}
+.food{position:relative;z-index:2;font-size:84px;filter:drop-shadow(8px 13px 5px #2c5d3527);transform:perspective(250px) rotateY(-8deg);animation:foodfloat 3.5s ease-in-out infinite}
+.card:nth-child(even) .food{animation-delay:.6s}
+@keyframes foodfloat{50%{transform:perspective(250px) rotateY(5deg) translateY(-5px)}}
+.tag{position:absolute;z-index:4;left:20px;top:20px;background:#fff;padding:6px 9px;border-radius:9px;font-size:.67rem;font-weight:950;color:var(--orange)}
+.card h3{margin:13px 4px 2px;font-size:1rem}.meta{margin:0 4px;color:var(--muted);font-size:.76rem}
+.cardfoot{display:flex;align-items:center;justify-content:space-between;margin:12px 4px 2px}.price{color:var(--g);font-weight:950}.price small{color:var(--muted);font-weight:600}
+.add{width:38px;height:38px;border-radius:12px;background:var(--g);color:#fff;border:0;font-size:22px}.add:hover{background:var(--dark)}
+
+/* PROMO */
+.promo-section{background:#f6f0e2}
+.promo-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:19px}.promo{min-height:220px;border-radius:28px;padding:29px;position:relative;overflow:hidden;display:flex;align-items:center;justify-content:space-between;gap:15px}
+.promo h3{font-size:1.75rem;line-height:1.08;margin:7px 0}.promo p{color:#69746d;max-width:410px;font-size:.9rem}.promo-art{font-size:94px;filter:drop-shadow(9px 13px 5px #0002)}.discount{color:#e86c37}
+.pA{background:#ffe19a}.pB{background:#d5efca}.pC{background:#ffd2dc}.pD{background:#dcd1f7}
+.promo-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:19px;margin-top:19px}
+
+/* FUN */
+.fun{background:var(--g);color:#fff}.fun-grid{display:grid;grid-template-columns:1fr 1fr;gap:35px;align-items:center}.fun p{color:#dcecdf;margin-top:12px}
+.fun-cards{display:grid;grid-template-columns:1fr 1fr;gap:11px;margin-top:22px}.fun-card{background:#ffffff14;border:1px solid #ffffff12;border-radius:16px;padding:14px}.fun-card b{display:block}.fun-card span{font-size:.78rem;color:#d2e7d5}
+.quote{background:#fff;color:var(--dark);border-radius:28px;padding:28px;box-shadow:0 18px 45px #173d281c}.quote .emoji{font-size:55px}.quote h3{margin:7px 0}.quote p{color:var(--muted)}
+
+/* FOOTER */
+footer{background:#173424;color:#dbe8df;padding:45px 0 24px}.footergrid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:35px}footer h3{color:#fff;margin-bottom:9px}footer p,footer li{font-size:.86rem;color:#afc4b5}footer ul{list-style:none;display:grid;gap:6px}.copy{border-top:1px solid #30503c;margin-top:28px;padding-top:16px;color:#8ea997;font-size:.77rem}
+
+/* CART + TOAST */
+.cartpanel{position:fixed;right:18px;top:88px;width:min(370px,calc(100% - 36px));z-index:200;background:#fff;border-radius:22px;padding:20px;box-shadow:0 25px 70px #0003;display:none}.cartpanel.open{display:block}
+.cartrow{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eee;font-size:.87rem}.total{display:flex;justify-content:space-between;margin:15px 0;color:var(--g);font-weight:950}.checkout{width:100%;padding:13px;border:0;border-radius:13px;background:var(--g);color:#fff;font-weight:900}
+.toast{position:fixed;z-index:300;left:50%;bottom:24px;transform:translate(-50%,130px);background:#183b29;color:#fff;padding:13px 18px;border-radius:13px;font-weight:850;box-shadow:var(--shadow);transition:.3s}.toast.show{transform:translate(-50%,0)}
+
+@media(max-width:900px){nav{display:none}.hero-grid,.fun-grid{grid-template-columns:1fr}.products{grid-template-columns:repeat(2,1fr)}.promo-grid{grid-template-columns:1fr}}
+@media(max-width:560px){.nav{height:68px}.logo{font-size:.88rem}.hero{padding-top:45px}.hero-art{height:315px;border-radius:28px}.hero-fruit{width:78px;height:78px;font-size:48px}.hf5{width:56px;height:56px;font-size:35px}.products{gap:10px}.pic{height:145px}.food{font-size:62px}.card{border-radius:18px;padding:9px}.promo-grid2{grid-template-columns:1fr}.promo{min-height:190px;padding:23px}.promo-art{font-size:70px}.fun-cards{grid-template-columns:1fr}.footergrid{grid-template-columns:1fr}h1{letter-spacing:-2.5px}}
+</style>
+</head>
+<body>
+
+<header>
+<div class="container nav">
+<a href="#" class="logo"><span class="logo-icon">🍃</span><span>Toko Buah dan Sayur Segarin<small>fresh • fruity • happy</small></span></a>
+<nav><a href="#produk">Produk</a><a href="#promo">Promo</a><a href="#cerita">Cerita Segarin</a><a href="#kontak">Kontak</a></nav>
+<button class="musicbtn" id="musicBtn" onclick="toggleMusic()">🎵 Musik OFF</button>
+<button class="cart" onclick="toggleCart()">🛒 Keranjang <span class="count" id="count">0</span></button>
+</div>
+</header>
+
+<audio id="bgMusic" loop preload="none">
+<source src="musik_segarin_original.wav" type="audio/wav">
+</audio>
+
+<div class="cartpanel" id="cartPanel">
+<h3>🧺 Keranjang Segarin</h3>
+<div id="cartItems"><p style="color:#718078;font-size:.9rem;margin-top:8px">Keranjang masih kosong.</p></div>
+<div class="total"><span>Total</span><span id="total">Rp0</span></div>
+<button class="checkout" onclick="checkout()">Pesan Sekarang ✨</button>
+</div>
+
+<section class="hero">
+<div class="container hero-grid">
+<div>
+<span class="kicker">🍓 Baru datang pagi ini • fresh banget!</span>
+<h1>Belanja <span>segar</span>,<br>mood ikut <span>cerah.</span> 🌈</h1>
+<p>Hai, pencinta buah dan sayur! 💚 Santai aja, nggak perlu buru-buru. Lihat-lihat dulu, cari warna favoritmu, dan pilih bahan segar yang paling bikin kamu pengin masak hari ini. 😋</p>
+<div class="actions"><a class="btn mainbtn" href="#produk">Jelajahi Produk 🍊</a><a class="btn lightbtn" href="#promo">Lihat Promo 🎁</a></div>
+<div class="hero-notes"><span>✓ <b>Fresh setiap hari</b></span><span>✓ Dicek sebelum dikemas</span><span>✓ Siap dikirim</span></div>
+</div>
+<div class="hero-art">
+<span class="deco d1">✦</span><span class="deco d2">✿</span><span class="deco d3">✦</span>
+<div class="hero-fruit hf1">🍓</div><div class="hero-fruit hf2">🍊</div><div class="hero-fruit hf3">🥑</div><div class="hero-fruit hf4">🥦</div><div class="hero-fruit hf5">🍋</div>
+<div class="hero-label">🌿 Dipilih dengan cinta & dicek kesegarannya</div>
+</div>
+</div>
+</section>
+
+<section id="produk">
+<div class="container">
+<div class="top">
+<div><div class="eyebrow">Etalase Segarin</div><h2>Pilih yang bikin hati happy 💚</h2><p class="desc">Nggak tahu mau pilih apa? Tenang. Scroll pelan-pelan, lihat warna dan bentuknya, lalu biarkan buah favoritmu menemukan jalannya ke keranjang. 😆</p></div>
+<div class="chips"><button class="chip active" onclick="filter('all',this)">Semua</button><button class="chip" onclick="filter('buah',this)">🍎 Buah</button><button class="chip" onclick="filter('sayur',this)">🥬 Sayur</button></div>
+</div>
+<div class="products" id="products"></div>
+</div>
+</section>
+
+<section id="promo" class="promo-section">
+<div class="container">
+<div class="top"><div><div class="eyebrow">Promo bikin senyum</div><h2>Harga turun, semangat makan sehat naik! 🎉</h2><p class="desc">Pilih promo favoritmu. Jangan sampai buahnya cuma dilihat, ya—ajak pulang! 😂</p></div></div>
+<div class="promo-grid">
+<div class="promo pA"><div><div class="eyebrow">Paling rame</div><h3>Keranjang Ceria<br><span class="discount">Diskon 20%</span></h3><p>Apel + jeruk + pisang + wortel. Satu paket buat stok keluarga.</p><button class="btn mainbtn" onclick="promo('Keranjang Ceria',68000)">Ambil Promo →</button></div><div class="promo-art">🍎🍌</div></div>
+<div class="promo pB"><div><div class="eyebrow">Green deal</div><h3>Green Combo</h3><p>Brokoli + bayam + wortel.</p><button class="btn mainbtn" onclick="promo('Green Combo',39000)">Hemat 15% →</button></div><div class="promo-art">🥦🥕</div></div>
+</div>
+<div class="promo-grid2">
+<div class="promo pC"><div><div class="eyebrow">Sweet deal</div><h3>Buah Ceria 🍓</h3><p>3 buah favorit dengan harga spesial.</p><button class="btn mainbtn" onclick="promo('Buah Ceria',55000)">Aku Mau! →</button></div><div class="promo-art">🍓🍊</div></div>
+<div class="promo pD"><div><div class="eyebrow">Weekend</div><h3>Vitamin Color Pack</h3><p>Campuran buah warna-warni untuk weekend.</p><button class="btn mainbtn" onclick="promo('Vitamin Color Pack',62000)">Ambil →</button></div><div class="promo-art">🥝🍉</div></div>
+</div>
+</div>
+</section>
+
+<section id="cerita" class="fun">
+<div class="container fun-grid">
+<div><div class="eyebrow">Kenapa Segarin?</div><h2>Belanja bahan makanan nggak harus membosankan. 🌈</h2><p>Kami pengin halaman ini terasa seperti masuk ke kebun kecil yang ceria: penuh warna, pilihan, promo, dan sedikit candaan. Karena memilih sayur pun boleh sambil senyum. 😆</p>
+<div class="fun-cards">
+<div class="fun-card">🌱 <b>Freshness Check</b><span>Dicek sebelum masuk keranjang.</span></div>
+<div class="fun-card">🍊 <b>Fruity Mood</b><span>Warna ceria setiap hari.</span></div>
+<div class="fun-card">🥬 <b>Sayur Pilihan</b><span>Untuk masakan rumahan.</span></div>
+<div class="fun-card">💚 <b>Happy Shopping</b><span>Belanja santai tanpa pusing.</span></div>
+</div></div>
+<div class="quote"><div class="emoji">🍉✨</div><h3>Pesan kecil dari Segarin</h3><p>“Kalau belum tahu mau masak apa, mulai dari satu warna. Kalau sudah masuk keranjang tiga warna… ya sudah, sekalian masak yang enak!” 😭💚</p></div>
+</div>
+</section>
+
+<footer id="kontak">
+<div class="container">
+<div class="footergrid">
+<div><h3>🍃 Toko Buah dan Sayur Segarin</h3><p>Tempat buah segar, sayur pilihan, promo seru, dan mood yang dibuat lebih happy.</p></div>
+<div><h3>Jelajahi</h3><ul><li>Produk Segar</li><li>Promo Mingguan</li><li>Paket Hemat</li><li>Cerita Segarin</li></ul></div>
+<div><h3>Hubungi</h3><ul><li>📍 Pekalongan, Jawa Tengah</li><li>📱 08xx-xxxx-xxxx</li><li>✉️ halo@segarin.id</li><li>🕘 07.00–20.00 WIB</li></ul></div>
+</div><div class="copy">© 2026 Toko Buah dan Sayur Segarin • Fresh food, happy mood 🍓</div>
+</div>
+</footer>
+
+<div class="toast" id="toast">Ditambahkan ✓</div>
+
+<script>
+const products=[
+["Apel Fuji","buah","🍎",28000,"kg","Malang","Manis"],
+["Jeruk Sunkist","buah","🍊",32000,"kg","California","Juicy"],
+["Pisang Cavendish","buah","🍌",18000,"sisir","Lampung","Favorit"],
+["Alpukat Mentega","buah","🥑",26000,"kg","Jawa Barat","Creamy"],
+["Stroberi","buah","🍓",35000,"pack","Bandung","Fresh"],
+["Mangga Harum Manis","buah","🥭",30000,"kg","Probolinggo","Manis"],
+["Semangka Merah","buah","🍉",24000,"kg","Kediri","Juicy"],
+["Kiwi","buah","🥝",45000,"pack","New Zealand","Premium"],
+["Brokoli","sayur","🥦",22000,"kg","Bandung","Renyah"],
+["Wortel Premium","sayur","🥕",16000,"kg","Dieng","Hemat"],
+["Bayam Organik","sayur","🥬",9000,"ikat","Lembang","Organik"],
+["Tomat Merah","sayur","🍅",14000,"kg","Magelang","Fresh"],
+["Paprika","sayur","🫑",28000,"kg","Bandung","Colorful"],
+["Jagung Manis","sayur","🌽",17000,"3 pcs","Wonosobo","Manis"],
+["Terong Ungu","sayur","🍆",12000,"kg","Pekalongan","Fresh"],
+["Kentang","sayur","🥔",18000,"kg","Dieng","Pilihan"],
+["Timun","sayur","🥒",11000,"kg","Pemalang","Renyah"],
+["Bawang Merah","sayur","🧅",32000,"kg","Brebes","Wangi"],
+["Bawang Putih","sayur","🧄",36000,"kg","Tegal","Pilihan"],
+["Nanas Madu","buah","🍍",26000,"pcs","Subang","Manis"]
+];
+let cart=[];
+const rupiah=n=>new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(n);
+function render(list=products){
+ document.getElementById("products").innerHTML=list.map(p=>`
+ <article class="card"><div class="pic"><span class="tag">${p[6]}</span><span class="food">${p[2]}</span></div>
+ <h3>${p[0]}</h3><div class="meta">📍 ${p[5]} • / ${p[4]}</div>
+ <div class="cardfoot"><div class="price">${rupiah(p[3])} <small>/ ${p[4]}</small></div><button class="add" onclick="add('${p[0]}','${p[2]}',${p[3]})">+</button></div></article>`).join("");
+}
+function filter(cat,el){
+ document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));el.classList.add("active");
+ render(cat==="all"?products:products.filter(p=>p[1]===cat));
+}
+function add(name,emoji,price){cart.push({name,emoji,price});update();toast(name+" masuk keranjang! 🧺")}
+function promo(name,price){cart.push({name,emoji:"🎁",price});update();toast(name+" ditambahkan! 🎉")}
+function update(){
+ document.getElementById("count").textContent=cart.length;
+ document.getElementById("cartItems").innerHTML=cart.length?cart.map(p=>`<div class="cartrow"><span>${p.emoji} ${p.name}</span><b>${rupiah(p.price)}</b></div>`).join(""):'<p style="color:#718078;font-size:.9rem">Keranjang masih kosong.</p>';
+ document.getElementById("total").textContent=rupiah(cart.reduce((a,p)=>a+p.price,0));
+}
+function toggleCart(){document.getElementById("cartPanel").classList.toggle("open")}
+function checkout(){cart.length?toast("Pesanan siap diproses! 💚"):toast("Keranjang masih kosong 😆")}
+const bgMusic=document.getElementById("bgMusic");
+const musicBtn=document.getElementById("musicBtn");
+function toggleMusic(){
+ if(bgMusic.paused){
+   bgMusic.play().then(()=>{
+     musicBtn.textContent="🎵 Musik ON";
+     musicBtn.classList.add("on");
+     toast("Musik Segarin dimainkan! 🎶");
+   }).catch(()=>toast("Tekan lagi untuk menyalakan musik 🎵"));
+ }else{
+   bgMusic.pause();
+   musicBtn.textContent="🎵 Musik OFF";
+   musicBtn.classList.remove("on");
+ }
+}
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),2200)}
+render();
+</script>
+</body>
+</html>
